@@ -1,0 +1,17 @@
+:root{
+    --design-w:402; --design-h:874;
+    /* 필요할 때만 축소 */
+    --scale: min(1, 100vw/(var(--design-w)*1px), 100dvh/(var(--design-h)*1px));
+}
+html,body,#root{height:100%;margin:0;background:#000;}
+.stage{
+    position:fixed; left:40%; top:5%;
+    width:calc(var(--design-w)*1px); height:calc(var(--design-h)*1px);
+    transform:translate(-50%,-50%) scale(var(--scale));
+    transform-origin:top left; background:#fff; overflow:hidden; border-radius:24px;
+}
+.safe{
+    padding:env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+    height:100%; box-sizing:border-box;
+}
