@@ -73,3 +73,13 @@ html { font-family: var(--font-sans); }
 /*    background-color: #f9f9f9;*/
 /*  }*/
 /*}*/
+
+html, body, #root {
+    background-color: #121212; /* 알림 페이지와 동일한 어두운 배경색 */
+    height: 100%;
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+
