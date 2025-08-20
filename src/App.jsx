@@ -1,66 +1,67 @@
 import './FixedStage.css'
-import Login from './pages/Auth/Login'
-import Signup from './pages/Auth/Signup'
-
-import React, { useState } from 'react'; // ✨ 1. useState를 import 합니다.
-import { BrowserRouter, Routes, Route, useLocation,Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 // 페이지 및 데이터 import
+import Login from './pages/Auth/Login';
+import Signup from './pages/Auth/Signup';
 import Home from './pages/Home/Home.jsx';
 import NotificationPage from './pages/Home/NotificationPage.jsx';
-import { initialQuests } from './pages/Quests/Quests.jsx'; // ✨ 2. 퀘스트 초기 데이터도 가져옵니다.
+import { initialQuests } from './pages/Quests/Quests.jsx';
 
-function AppContent() {
+// 애니메이션과 라우팅을 함께 처리하는 컴포넌트
+function AnimatedRoutes() {
     const location = useLocation();
 
-    // ✨ 3. Home 컴포넌트가 가지고 있던 상태들을 모두 AppContent로 가져옵니다.
-    // 이제 이 상태들은 페이지가 전환되어도 절대 사라지지 않습니다.
+    // Home 컴포넌트의 상태는 여기서 관리해야 페이지가 전환되어도 유지됩니다.
     const [majorLevel, setMajorLevel] = useState(1);
     const [currentSteps, setCurrentSteps] = useState(0);
     const [quests, setQuests] = useState(initialQuests);
 
     return (
-        <div className="App">
-            <AnimatePresence mode="wait">
-                <Routes location={location} key={location.pathname}>
-                    <Route path="/notifications" element={<NotificationPage />} />
-                    {/* ✨ 4. Home 컴포넌트에 상태와 상태 변경 함수들을 props로 전달합니다. */}
-                    <Route 
-                        path="/*" 
-                        element={
-                            <Home 
-                                majorLevel={majorLevel}
-                                setMajorLevel={setMajorLevel}
-                                currentSteps={currentSteps}
-                                setCurrentSteps={setCurrentSteps}
-                                quests={quests}
-                                setQuests={setQuests}
-                            />
-                        } 
-                    />
-                </Routes>
-            </AnimatePresence>
-        </div>
+        <AnimatePresence mode="wait">
+            {/* 모든 경로를 하나의 Routes 안에서 관리합니다. */}
+            <Routes location={location} key={location.pathname}>
+                {/* 인증 관련 페이지 */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+
+                {/* 메인 앱 페이지 */}
+                <Route 
+                    path="/" 
+                    element={
+                        <Home 
+                            majorLevel={majorLevel}
+                            setMajorLevel={setMajorLevel}
+                            currentSteps={currentSteps}
+                            setCurrentSteps={setCurrentSteps}
+                            quests={quests}
+                            setQuests={setQuests}
+                        />
+                    } 
+                />
+                <Route path="/notifications" element={<NotificationPage />} />
+
+                {/* 일치하는 경로가 없을 때 (404 Not Found) */}
+                <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
+            </Routes>
+        </AnimatePresence>
     );
 }
 
+// App 컴포넌트는 전체적인 레이아웃과 라우터 설정을 담당합니다.
 export default function App() {
     return (
         <div className="stage-outer">
             <div className="stage-inner">
                 <div className="safe">
-                    <Routes>
-                        <Route path="/" element={<Navigate to="/login" replace/>}/>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/signup" element={<Signup />} />
-                        <Route path="*" element={<div className="p-4">404</div>} />
-                    </Routes>
+                    {/* 라우터는 여기서 단 한 번만 선언합니다. */}
                     <BrowserRouter>
-                        <AppContent />
+                        <AnimatedRoutes />
                     </BrowserRouter>
                 </div>
             </div>
         </div>
-    )
+    );
 }
