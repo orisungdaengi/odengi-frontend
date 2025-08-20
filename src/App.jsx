@@ -1,11 +1,9 @@
 import './FixedStage.css'
-<<<<<<< HEAD
-import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
-=======
+
 import React, { useState } from 'react'; // ✨ 1. useState를 import 합니다.
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation,Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 // 페이지 및 데이터 import
@@ -46,25 +44,21 @@ function AppContent() {
         </div>
     );
 }
->>>>>>> e5aa555 (mainpage finish)
 
 export default function App() {
     return (
         <div className="stage-outer">
             <div className="stage-inner">
                 <div className="safe">
-<<<<<<< HEAD
                     <Routes>
                         <Route path="/" element={<Navigate to="/login" replace/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup />} />
                         <Route path="*" element={<div className="p-4">404</div>} />
                     </Routes>
-=======
                     <BrowserRouter>
                         <AppContent />
                     </BrowserRouter>
->>>>>>> e5aa555 (mainpage finish)
                 </div>
             </div>
         </div>
