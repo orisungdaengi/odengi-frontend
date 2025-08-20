@@ -1,31 +1,22 @@
 :root{
-    --w: 402; --h: 874;
+    --w:402; --h:874;
     --scale: min(1, 100vw/(var(--w)*1px), 100dvh/(var(--h)*1px));
 }
-html,body,#root{height:100%;margin:0;background:#000;}
 
-/* 바깥: 가운데 정렬 */
-.stage-outer{
-    position: fixed;
-    left: 50%; top: 50%;
-    transform: translate(-50%, -50%);
-}
+html,body,#root{height:100%; margin:0; background:#000;}
+*{box-sizing:border-box;}
 
-/* 안쪽: 크기/스케일/모양 */
+.stage-outer{ height:100%; display:grid; place-items:center; }
 .stage-inner{
-    width: calc(var(--w)*1px);
-    height: calc(var(--h)*1px);
-    background: #fff;
-    border-radius: 24px;
-    overflow: hidden;
-
+    width:calc(var(--w)*1px);
+    height:calc(var(--h)*1px);
+    background:#fff;
+    border-radius:24px; overflow:hidden;
     transform: scale(var(--scale));
     transform-origin: top left;
 }
-
 .safe{
+    height:100%;
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
-    height: 100%;
-    box-sizing: border-box;
 }
