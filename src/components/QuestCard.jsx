@@ -1,13 +1,25 @@
 import React from 'react';
 import { Box, Paper, Typography } from '@mui/material';
 
+const levelColors=[
+  '#3E5F3C',
+  '#4E6A3F',
+  '#6D9752',
+  '#64B044',
+  '#47A74B',
+];
+
+
 /**
  * 현재 퀘스트 정보를 표시하는 카드 컴포넌트
  * @param {object} props
  * @param {object} props.currentQuest - 현재 퀘스트 객체 (없으면 null)
  * @param {function} props.onComplete - 카드를 클릭했을 때 실행될 함수
- */
-const QuestCard = ({ currentQuest, onComplete }) => {
+ * @param {number} props.majorLevel
+*/
+const QuestCard = ({ currentQuest, onComplete,majorLevel=1 }) => {
+  
+  const backgroundColor = levelColors[majorLevel - 1] || levelColors[0];
   return (
     <Paper
       elevation={3}
@@ -16,7 +28,7 @@ const QuestCard = ({ currentQuest, onComplete }) => {
       sx={{
         width: '90%',
         p: 2,
-        backgroundColor: '#4A5C4A',
+        backgroundColor: backgroundColor,
         color: 'white',
         borderRadius: '16px',
         display: 'flex',
@@ -28,6 +40,7 @@ const QuestCard = ({ currentQuest, onComplete }) => {
         top: 0,
         left: '50%',
         transform: 'translateX(-50%)',
+        transition: 'background-color 0.3s ease-in-out',
         zIndex: 1, // 다른 요소 위에 보이도록 zIndex 추가
       }}
     >
