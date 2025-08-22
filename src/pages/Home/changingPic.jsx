@@ -1,19 +1,19 @@
 // --- 이미지 파일들을 먼저 import 합니다 ---
 // (실제 프로젝트의 이미지 경로에 맞게 수정해주세요)
-import charLv1 from './characterImg/charLv1.png';
-import bgLv1 from './backgroundImg/backgroundLv1.png';
+import charLv1 from '/images/Homes/characterImg/charLv1.png';
+import bgLv1 from '/images/Homes/backgroundImg/backgroundLv1.png';
 
-import charLv2 from './characterImg/charLv2.png';
-import bgLv2 from './backgroundImg/backgroundLv2.png';
+import charLv2 from '/images/Homes/characterImg/charLv2.png';
+import bgLv2 from '/images/Homes/backgroundImg/backgroundLv2.png';
 
-import charLv3 from './characterImg/charLv3.png';
-import bgLv3 from './backgroundImg/backgroundLv3.png';
+import charLv3 from '/images/Homes/characterImg/charLv3.png';
+import bgLv3 from '/images/Homes/backgroundImg/backgroundLv3.png';
 
-import charLv4 from './characterImg/charLv4.png';
-import bgLv4 from './backgroundImg/backgroundLv4.png';
+import charLv4 from '/images/Homes/characterImg/charLv4.png';
+import bgLv4 from '/images/Homes/backgroundImg/backgroundLv4.png';
 
-import charLv5 from './characterImg/charLv5.png';
-import bgLv5 from './backgroundImg/backgroundLv5.png';
+import charLv5 from '/images/Homes/characterImg/charLv5.png';
+import bgLv5 from '/images/Homes/backgroundImg/backgroundLv5.png';
 
 
 // 배열 형태로 레벨별 데이터를 관리합니다.
