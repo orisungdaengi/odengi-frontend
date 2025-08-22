@@ -145,6 +145,7 @@
 // export default Home;
 
 import React from 'react';
+// ✨ 1. useNavigate 훅을 react-router-dom에서 가져옵니다.
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, IconButton } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -156,6 +157,7 @@ import XPBar from '../../components/XPBar.jsx';
 import QuestCard from '../../components/QuestCard.jsx';
 import NotificationIcon from '../../components/NotificationIcon.jsx';
 
+
 import { STEPS_PER_MAJOR_LEVEL } from '../Quests/Quests.jsx';
 import { levelAssets } from './changingPic.jsx';
 import groundImage from '../../../public/images/Homes/backgroundImg/배경1.png';
@@ -164,6 +166,7 @@ import { notificationData } from '../../components/notificationData.jsx';
 const Home = ({
     majorLevel, setMajorLevel,
     currentSteps, setCurrentSteps,
+
     quests, setQuests,
     selectedStep, setSelectedStep
 }) => {
@@ -287,6 +290,7 @@ const Home = ({
             <BottomNavBar />
         </Box>
     );
+
 };
 
 export default Home;

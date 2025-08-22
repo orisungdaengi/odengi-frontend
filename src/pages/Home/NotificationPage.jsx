@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { pageVariants, pageTransition } from '../../Animations.js'; 
 
 import { notificationData } from '../../components/notificationData.jsx';
-import BottomNavBar from '../../components/NavBar.jsx';
+
 
 
 
@@ -115,7 +115,7 @@ const NotificationPage = () => {
           </AnimatePresence>
         </Box>
       </Box>
-      <BottomNavBar />
+
     </Box>
   );
 };
