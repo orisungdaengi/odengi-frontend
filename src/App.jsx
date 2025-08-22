@@ -4,7 +4,10 @@ import { AnimatePresence } from 'framer-motion';
 
 import './FixedStage.css';
 
+
+
 // 스크린샷에 맞는 정확한 경로로 수정
+
 import Login from './pages/Auth/Login.jsx';
 import Signup from './pages/Auth/Signup.jsx';
 import Home from './pages/Home/Home.jsx';
@@ -13,37 +16,57 @@ import QuestListPage from './pages/Quests/QuestListPage.jsx';
 import { initialQuests } from './pages/Quests/Quests.jsx';
 import BottomNavBar from './components/NavBar.jsx';
 
-// 페이지와 네비게이션 바를 함께 묶어서 관리하는 컴포넌트
+import QuestDetailPage_1_5 from './pages/Quests/QuestDetails/1-5.jsx';
+import QuestDetailPage_1_7 from './pages/Quests/QuestDetails/1-7.jsx';
+import QuestDetailPage_3_7 from './pages/Quests/QuestDetails/3-7.jsx';
+import ChatPage_3_7 from './pages/Quests/QuestDetails/Chat_3-7.jsx';
+import QuestClearPage from './pages/Quests/QuestClearPage05.jsx';
+import Chat from './pages/Chat/Chat.jsx'; // ✨ 1. 새로 만드신 Chat.jsx를 import 합니다.
+
+
 function AppLayout() {
     const location = useLocation();
-    // 로그인/회원가입 페이지에서는 네비게이션 바를 숨김
     const showNavBar = location.pathname !== '/login' && location.pathname !== '/signup';
-    // 현재 경로가 '/quests'인지 정확하게 확인
-    const isQuestPage = location.pathname === '/quests';
+    const useDarkNavBar = location.pathname.startsWith('/quests') || location.pathname === '/notifications';
 
     return (
         <>
             <AnimatedRoutes />
-            {showNavBar && <BottomNavBar variant={isQuestPage ? 'quest' : 'default'} />}
+            {showNavBar && <BottomNavBar variant={useDarkNavBar ? 'quest' : 'default'} />}
         </>
     );
 }
 
-// 페이지 전환 및 상태 관리를 담당하는 컴포넌트
+// App.jsx 파일의 AnimatedRoutes 함수를 아래 코드로 교체하세요.
+
+
 function AnimatedRoutes() {
     const location = useLocation();
     const [majorLevel, setMajorLevel] = useState(1);
     const [currentSteps, setCurrentSteps] = useState(0);
     const [quests, setQuests] = useState(initialQuests);
 
+    // ✅ 선택된 퀘스트 상태 추가
+    const [selectedStep, setSelectedStep] = useState(1);
+
     return (
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
+
+                {/* 변경점: 기본 경로 '/'로 접속 시 '/quests' 페이지로 즉시 이동(Navigate)하도록 수정했습니다.
+                */}
+                <Route path="/" element={<Navigate to="/quests" />} />
+                
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+
+
                 {/* 1. 기본 경로('/')를 로그인 페이지로 리다이렉트 */}
                 <Route path="/" element={<Navigate to="/login" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 {/* 2. 홈 화면 경로는 '/home'으로 명확히 지정 */}
+
                 <Route
                     path="/home"
                     element={
@@ -51,21 +74,41 @@ function AnimatedRoutes() {
                             majorLevel={majorLevel} setMajorLevel={setMajorLevel}
                             currentSteps={currentSteps} setCurrentSteps={setCurrentSteps}
                             quests={quests} setQuests={setQuests}
+
+                            selectedStep={selectedStep} setSelectedStep={setSelectedStep}  // ✅ 전달
+
+
                         />
                     }
                 />
                 <Route path="/notifications" element={<NotificationPage />} />
                 <Route
                     path="/quests"
+
+                    element={
+                        <QuestListPage
+                            quests={quests} setQuests={setQuests}
+                            selectedStep={selectedStep} setSelectedStep={setSelectedStep}  // ✅ 전달
+                        />
+                    }
+                />
+                <Route path="/quests/5" element={<QuestDetailPage_1_5 />} />
+                <Route path="/clear" element={<QuestClearPage />} />
+                <Route path="/quests/1-7" element={<QuestDetailPage_1_7 />} />
+                <Route path="/quests/3-7" element={<QuestDetailPage_3_7 />} />
+                <Route path="/quests/3-7/chat" element={<ChatPage_3_7 />} />
+                <Route path="/chat" element={<Chat />} />
+
                     element={ <QuestListPage quests={quests} setQuests={setQuests} majorLevel={majorLevel} /> }
                 />
+
                 <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
+
             </Routes>
         </AnimatePresence>
     );
 }
 
-// 앱의 최종 진입점
 export default function App() {
     return (
         <div className="stage-outer">

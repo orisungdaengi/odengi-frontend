@@ -51,7 +51,16 @@ const QuestCard = ({ currentQuest, onComplete,majorLevel=1 }) => {
             <Typography variant="h6">{currentQuest.title}</Typography>
             <Typography variant="body2">{currentQuest.description}</Typography>
           </Box>
-          <Typography variant="h4">&gt;</Typography>
+          {/* 변경된 부분: style 속성을 추가하여 아이콘을 180도 회전시킵니다. */}
+          <svg 
+            width="30" 
+            height="30" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            style={{ transform: 'rotate(180deg)' }}
+          >
+            <path d="M15 6L9 12l6 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </>
       ) : (
         // 모든 퀘스트를 완료한 경우
