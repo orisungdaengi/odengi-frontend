@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { loginApi } from '../../services/auth'
 
 export default function Login() {
     const [id, setId] = useState('')
@@ -13,15 +14,14 @@ export default function Login() {
         e.preventDefault()
         setLoading(true); setError('')
         try {
-            // --- 나중에 실제 API 연동 시 이 부분의 주석을 해제하세요 ---
-            // const res = await loginApi({ user_id: id, password: pw })
-            // const token = res?.access_token || res?.token
-            // if (!token) throw new Error('로그인 실패')
-            // saveToken(token)
-            // ----------------------------------------------------
-
-            // ✨ 로그인 성공 시 '/home'으로 이동하도록 경로 수정
-            nav('/home', { replace: true })
+            // 1) 로그인 → 서버는 토큰 대신 유저(pk)만 돌려줌
+            const { userId, user } = await loginApi({ user_id: id, password: pw })
+            // 2) 전역으로 쓸 수 있게 보관 (간단히 localStorage; 있다면 UserContext에 setUser도 가능)
+            localStorage.setItem('userId', String(userId))
+            localStorage.setItem('userName', user?.name ?? '')
+            localStorage.setItem('userUserId', user?.user_id ?? '')
+             // 3) 다음 화면으로
+            nav('/onboarding/survey-outro', { replace: true })
         } catch (err) {
             setError(err.message || '로그인 실패')
         } finally {
@@ -29,7 +29,6 @@ export default function Login() {
         }
     }
 
-    // ... 나머지 return 부분은 기존과 동일 ...
     return (
         <div className="relative h-full w-full bg-[linear-gradient(12deg,_#122019_-8.17%,_#000_44.23%,_#081D25_107.49%)] overflow-hidden text-white">
             {/* 본문 */}
@@ -40,6 +39,7 @@ export default function Login() {
                     src="/images/signup/character.png"
                     alt=""
                 />
+
                 {/* 폼 */}
                 <form onSubmit={onSubmit} className="w-[300px] mt-[-64px] space-y-[8px] text-[14px] font-medium">
                     <label className="block">
@@ -55,6 +55,7 @@ export default function Login() {
                             />
                         </div>
                     </label>
+
                     <label className="block">
                         <span className="sr-only">비밀번호</span>
                         <div className="h-10 bg-stone-50 rounded-lg px-[13px] flex items-center gap-[16.5px]">
@@ -69,6 +70,7 @@ export default function Login() {
                             />
                         </div>
                     </label>
+
                     <div className="flex items-center justify-end text-[14px] mb-[24px] font-light">
                         <label className="inline-flex items-center gap-[6px] cursor-pointer select-none">
                             <input
@@ -84,13 +86,16 @@ export default function Login() {
                             />
                             <span>자동로그인</span>
                         </label>
+
                     </div>
+
                     <button
                         disabled={loading || !id || !pw}
                         className="h-[41px] w-full rounded-lg bg-white/20 hover:bg-white/30 transition mb-[24px] text-white text-[14px] font-normal"
                     >
                         {loading ? '로그인 중…' : '로그인'}
                     </button>
+
                     <div className="flex w-full justify-center font-normal">
                     <div className="flex items-center text-[13px] gap-2 text-slate-50/60">
                             <Link to="/find-id" className="hover:underline">아이디 찾기</Link>
@@ -100,6 +105,7 @@ export default function Login() {
                             <Link to="/signup" className="hover:underline">회원가입</Link>
                         </div>
                     </div>
+
                     {error && <p className="text-sm text-red-400">{error}</p>}
                 </form>
             </div>
