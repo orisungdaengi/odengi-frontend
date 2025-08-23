@@ -32,10 +32,6 @@ import ChatPage_3_7 from './pages/Quests/QuestDetails/Chat_3-7.jsx';
 import QuestClearPage from './pages/Quests/QuestClearPage05.jsx';
 import Chat from './pages/Chat/Chat.jsx';
 import RecordPage from './pages/Records/Records.jsx';
-
-
-// ✅ '기록'과 '마이' 페이지를 각각 import 합니다.
-import RecordPage from './pages/Records/Records.jsx';
 import MyPage from './pages/My/MyPage.jsx'; 
 
 function AppLayout() {
