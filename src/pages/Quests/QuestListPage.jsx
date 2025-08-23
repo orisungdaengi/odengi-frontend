@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { pageVariants, pageTransition } from '../../Animations.js';
+
 import QuestCard from '../../components/QuestCard.jsx';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,14 +16,18 @@ const charLv3 = '/images/Homes/characterImg/charLv3.png';
 const charLv4 = '/images/Homes/characterImg/charLv4.png';
 const charLv5 = '/images/Homes/characterImg/charLv5.png';
 
+
 const layoutPattern = [70, 60, 50, 40, 30, 30, 40, 50, 60, 70];
 const verticalGap = 100;
 
-const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => {
+
+const QuestListPage = ({ quests, selectedStep, setSelectedStep }) => {
   const navigate = useNavigate();
+
 
   const totalSteps = 50;
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
+
 
   const topOffset = 240;
   const totalHeight = topOffset + (totalSteps * verticalGap);
@@ -82,6 +87,7 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
     };
   }
 
+
   return (
     <Box
       component={motion.div}
@@ -95,23 +101,30 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
         width: '100%',
         height: '100%',
         overflowY: 'scroll',
+
         '::-webkit-scrollbar': { display: 'none' },
+
         msOverflowStyle: 'none',
         scrollbarWidth: 'none',
       }}
     >
       <Box sx={{
           position: 'sticky',
+
           top: '6rem',
+
           width: '90%',
           maxWidth: '400px',
           margin: '0 auto 2rem auto',
           zIndex: 10,
         }}>
         <QuestCard
+
           currentQuest={selectedQuest}
           onComplete={handleCardClick}
           majorLevel={selectedMajorLevel}
+
+
         />
       </Box>
 
@@ -125,7 +138,8 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
           backgroundPosition: 'top center',
           borderRadius:'24px',
         }}
-      >
+        >
+
         <Box
           component="img"
           src={characterImage}
@@ -141,10 +155,13 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
           const subLevel = (step - 1) % 10 + 1;
           const levelStepText = `${mainLevel}-${subLevel}`;
 
+
           return (
             <React.Fragment key={step}>
               <Box
+
                 onClick={() => handleCircleClick(step)}
+
                 sx={{
                   position: 'absolute',
                   top: `${verticalPosition}px`,
@@ -153,6 +170,7 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
                   width: 80,
                   height: 60,
                   cursor: 'pointer',
+
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -172,7 +190,7 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
                   sx={{
                     position: 'relative', 
                     zIndex: 1,
-                    fontWeight: '500',
+                    fontWeight: '600',
                     fontSize: '1.3rem', 
                     color: isGreenCircle ? 'white' : '#3E5F3C',
                   }}
@@ -181,6 +199,7 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
                 </Typography>
               </Box>
               
+
               {(step % 10 === 0 && step < totalSteps) && (
                 <Typography sx={{
                     position: 'absolute',
@@ -204,4 +223,6 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
   );
 };
 
+
 export default QuestListPage;
+

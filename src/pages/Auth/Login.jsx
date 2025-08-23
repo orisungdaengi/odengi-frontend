@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// 나중에 실제 API 붙일 때 these 2개 사용
-// import { loginApi } from '../../api/auth'
-// import { saveToken } from '../../state/auth'
+import { loginApi } from '../../services/auth'
 
 export default function Login() {
     const [id, setId] = useState('')
@@ -16,13 +14,14 @@ export default function Login() {
         e.preventDefault()
         setLoading(true); setError('')
         try {
-            // --- 실제 API 붙일 때 ---
-            // const res = await loginApi({ user_id: id, password: pw })
-            // const token = res?.access_token || res?.token
-            // if (!token) throw new Error('로그인 실패')
-            // saveToken(token)
-            // -----------------------
-            nav('/', { replace: true }) // 임시 이동(데모)
+            // 1) 로그인 → 서버는 토큰 대신 유저(pk)만 돌려줌
+            const { userId, user } = await loginApi({ user_id: id, password: pw })
+            // 2) 전역으로 쓸 수 있게 보관 (간단히 localStorage; 있다면 UserContext에 setUser도 가능)
+            localStorage.setItem('userId', String(userId))
+            localStorage.setItem('userName', user?.name ?? '')
+            localStorage.setItem('userUserId', user?.user_id ?? '')
+            // 3) 다음 화면으로
+            nav('/onboarding/survey-outro', { replace: true })
         } catch (err) {
             setError(err.message || '로그인 실패')
         } finally {
@@ -98,7 +97,7 @@ export default function Login() {
                     </button>
 
                     <div className="flex w-full justify-center font-normal">
-                    <div className="flex items-center text-[13px] gap-2 text-slate-50/60">
+                        <div className="flex items-center text-[13px] gap-2 text-slate-50/60">
                             <Link to="/find-id" className="hover:underline">아이디 찾기</Link>
                             <span className="w-[8px] h-px rotate-90 bg-slate-50/60"/>
                             <Link to="/find-password" className="hover:underline">비밀번호 찾기</Link>
