@@ -36,7 +36,7 @@ import MyPage from './pages/My/MyPage.jsx';
 
 function AppLayout() {
     const { pathname } = useLocation();
-    const path = pathname.replace(/\/+$/, ""); // 끝 슬래시 제거: '/onboarding/' -> '/onboarding'
+    const path = pathname === "/" ? "/" : pathname.replace(/\/+$/, ""); // 끝 슬래시 제거: '/onboarding/' -> '/onboarding'
 
     // 항상 숨길 경로(정확 일치)
     const HIDE_EXACT = ["/", "/login", "/signup"];
