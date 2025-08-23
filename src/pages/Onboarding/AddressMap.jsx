@@ -49,8 +49,8 @@ export default function AddressMap() {
             <div className="absolute left-0 bottom-0 w-full py-6 bg-gradient-to-bl from-gray-900 via-black to-neutral-900
                       rounded-t-2xl flex flex-col gap-4">
                 <div className="px-4">
-                    <div className="text-[18px] font-semibold">숭실대학교 정보과학관</div>
-                    <div className="text-[14px] text-neutral-400">서울 동작구 사당로 50(상도동)</div>
+                    <div className="text-[18px] font-semibold">숭실대학교 베어드홀</div>
+                    <div className="text-[14px] text-neutral-400">서울 동작구 상도로 369 (상도동)</div>
                 </div>
 
                 <div className="mx-4 h-10 px-4 bg-red-200/70 rounded-lg grid place-items-center">
