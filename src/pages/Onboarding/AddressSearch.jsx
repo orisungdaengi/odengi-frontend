@@ -49,8 +49,9 @@ export default function AddressSearch() {
             </div>
 
             {/* 검색 입력 */}
-            <div className="absolute left-[21px] top-[245px] w-[360px] h-12 bg-white/20 rounded-lg px-4 flex items-center gap-2">
-                <span className="w-4 h-4 rounded bg-zinc-500/70" />
+            <div
+                className="absolute left-[21px] top-[245px] w-[360px] h-12 bg-white/20 rounded-lg px-4 flex items-center gap-2">
+                <img className="ml-[3px] w-[16px] h-[16px]" src="/images/signup/search.svg" alt=""/>
                 <input
                     className="flex-1 bg-transparent outline-none placeholder:text-zinc-400 text-[15px]"
                     placeholder="지번,도로명,건물명으로 검색"
@@ -60,11 +61,19 @@ export default function AddressSearch() {
             {/* 현재 위치 찾기(비활성 스타일) */}
             <button
                 type="button"
-                className="absolute left-[21px] top-[307px] w-[360px] h-10 bg-white/30 rounded-lg grid place-items-center
-                   text-zinc-500 text-[14px]"
+                className="absolute left-[21px] top-[307px] w-[360px] h-10 rounded-lg
+             flex items-center justify-center gap-2 text-[#999] font-medium text-[14px]
+             bg-[#3f4344] hover:bg-[#bbb] hover:text-[#999]
+             transition-colors duration-200"
             >
+                <img
+                    className="w-[17px] h-[17px]"
+                    src="/images/signup/location.svg"
+                    alt="위치 아이콘"
+                />
                 현재 위치로 찾기
             </button>
+
 
             {/* 결과 리스트 (스크롤) */}
             <div
