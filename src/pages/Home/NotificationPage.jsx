@@ -88,7 +88,7 @@ const NotificationPage = () => {
       </Box>
       
       <Box sx={{ flexGrow: 1, px: 2, pt: '90px', pb: '72px' }}>
-        <Typography variant="h6" sx={{ mb: 1 }}>오늘</Typography>
+        <Typography variant="h6" sx={{ mb: 1, pt:4}}>오늘</Typography>
         <Box sx={{ backgroundColor: '#2E2E2E', borderRadius: '16px', mb: 4, overflow: 'hidden' }}>
           {/* ✨ [핵심] AnimatePresence로 리스트를 감싸야만, 리스트 아이템이 배열에서 제거될 때 exit 애니메이션이 작동합니다. */}
           <AnimatePresence>

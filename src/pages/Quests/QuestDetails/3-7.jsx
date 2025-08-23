@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { pageVariants, pageTransition } from '../../../Animations.js';
 
 const questBackground = '/images/Quests/QuestDetails/questbackImg.png';
-const characterIcon = '/images/Quests/QuestDetails/lv3_7character.png';
+const characterIcon = '/images/Homes/characterImg/charLv3.png';
 
 const initialMessages = [
   { id: 1, sender: 'character', text: '안녕하세요 영찬님' },

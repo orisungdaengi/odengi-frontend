@@ -160,7 +160,6 @@ import NotificationIcon from '../../components/NotificationIcon.jsx';
 
 import { STEPS_PER_MAJOR_LEVEL } from '../Quests/Quests.jsx';
 import { levelAssets } from './changingPic.jsx';
-import groundImage from '../../../public/images/Homes/backgroundImg/배경1.png';
 import { notificationData } from '../../components/notificationData.jsx';
 
 const Home = ({
@@ -272,21 +271,7 @@ const Home = ({
                 </Box>
             </Box>
 
-            <Box
-                component="img"
-                src={groundImage}
-                alt="하단 배경"
-                sx={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '20vh',
-                    maxHeight: '150px',
-                    objectFit: 'cover',
-                    zIndex: 0,
-                }}
-            />
+            
             <BottomNavBar />
         </Box>
     );

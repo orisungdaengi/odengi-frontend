@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import './FixedStage.css'
-import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
@@ -34,6 +34,10 @@ import Chat from './pages/Chat/Chat.jsx';
 import RecordPage from './pages/Records/Records.jsx';
 
 
+// ✅ '기록'과 '마이' 페이지를 각각 import 합니다.
+import RecordPage from './pages/Records/Records.jsx';
+import MyPage from './pages/My/MyPage.jsx'; 
+
 function AppLayout() {
     const location = useLocation();
     const showNavBar = location.pathname !== '/login' && location.pathname !== '/signup';
@@ -52,9 +56,14 @@ function AnimatedRoutes() {
     const [majorLevel, setMajorLevel] = useState(1);
     const [currentSteps, setCurrentSteps] = useState(0);
     const [quests, setQuests] = useState(initialQuests);
-
-    // ✅ 선택된 퀘스트 상태 추가
     const [selectedStep, setSelectedStep] = useState(1);
+
+    useEffect(() => {
+        const newMajorLevel = Math.floor((selectedStep - 1) / 10) + 1;
+        if (newMajorLevel !== majorLevel) {
+            setMajorLevel(newMajorLevel);
+        }
+    }, [selectedStep]);
 
     return (
         <AnimatePresence mode="wait">
@@ -63,7 +72,6 @@ function AnimatedRoutes() {
                 {/* 기본 경로 */}
                 <Route path="/" element={<StartPage />} />
                 {/*<Route path="/" element={<Navigate to="/login" />} />*/}
-
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/onboarding/intro" element={<OnboardingIntro />} />
@@ -78,6 +86,8 @@ function AnimatedRoutes() {
                 <Route path="/onboarding/survey-outro" element={<SurveyOutro />} />
 
 
+
+                <Route path="/my" element={<MyPage />} />
                 <Route path="/home"
                     element={
                         <Home
@@ -98,6 +108,7 @@ function AnimatedRoutes() {
                         />
                     }
                 />
+
                 <Route path="/quests/5" element={<QuestDetailPage_1_5 />} />
                 <Route path="/clear" element={<QuestClearPage />} />
                 <Route path="/quests/1-7" element={<QuestDetailPage_1_7 />} />
@@ -106,8 +117,8 @@ function AnimatedRoutes() {
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/records" element={<RecordPage />} />
 
-                <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
 
+                <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
             </Routes>
         </AnimatePresence>
     );
@@ -138,5 +149,7 @@ export default function App() {
                 </div>
             </div>
         </div>
-    )
+
+    );
+
 }
