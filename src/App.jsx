@@ -33,6 +33,7 @@ import QuestClearPage from './pages/Quests/QuestClearPage05.jsx';
 import Chat from './pages/Chat/Chat.jsx';
 import RecordPage from './pages/Records/Records.jsx';
 import MyPage from './pages/My/MyPage.jsx'; 
+import WalkMissionPage from './pages/SurpriseQuest.jsx';
 
 function AppLayout() {
     const { pathname } = useLocation();
@@ -123,10 +124,11 @@ function AnimatedRoutes() {
                 <Route path="/quests/1-7" element={<QuestDetailPage_1_7 />} />
                 <Route path="/quests/3-7" element={<QuestDetailPage_3_7 />} />
                 <Route path="/quests/3-7/chat" element={<ChatPage_3_7 />} />
+
+                <Route path="/surprise-quest" element={<WalkMissionPage />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/records" element={<RecordPage />} />
-
-
+                 {/* --- 일치하는 경로가 없을 때 --- */}
                 <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
             </Routes>
         </AnimatePresence>
