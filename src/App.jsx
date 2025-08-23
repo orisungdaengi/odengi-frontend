@@ -133,6 +133,7 @@ import Chat from './pages/Chat/Chat.jsx';
 // ✅ '기록'과 '마이' 페이지를 각각 import 합니다.
 import RecordPage from './pages/Records/Records.jsx';
 import MyPage from './pages/My/MyPage.jsx'; 
+import WalkMissionPage from './pages/SurpriseQuest.jsx';
 
 function AppLayout() {
     const location = useLocation();
@@ -183,7 +184,7 @@ function AnimatedRoutes() {
                 <Route path="/quests/1-7" element={<QuestDetailPage_1_7 />} />
                 <Route path="/quests/3-7" element={<QuestDetailPage_3_7 />} />
                 <Route path="/quests/3-7/chat" element={<ChatPage_3_7 />} />
-                
+                <Route path="/surprise-quest" element={<WalkMissionPage />} />
                 {/* --- 일치하는 경로가 없을 때 --- */}
                 <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
             </Routes>
