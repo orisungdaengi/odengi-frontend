@@ -39,9 +39,22 @@ import RecordPage from './pages/Records/Records.jsx';
 import MyPage from './pages/My/MyPage.jsx'; 
 
 function AppLayout() {
-    const location = useLocation();
-    const showNavBar = location.pathname !== '/login' && location.pathname !== '/signup';
-    const useDarkNavBar = location.pathname.startsWith('/quests') || location.pathname === '/notifications';
+    const { pathname } = useLocation();
+    const path = pathname.replace(/\/+$/, ""); // 끝 슬래시 제거: '/onboarding/' -> '/onboarding'
+
+    // 항상 숨길 경로(정확 일치)
+    const HIDE_EXACT = ["/", "/login", "/signup"];
+
+    // 접두사로 숨길 경로
+    const HIDE_PREFIX = [/^\/onboarding(\/|$)/];
+
+    const showNavBar =
+        !HIDE_EXACT.includes(path) &&
+        !HIDE_PREFIX.some((re) => re.test(path));
+
+    const useDarkNavBar =
+        /^\/quests(\/|$)/.test(path) || path === "/notifications";
+
 
     return (
         <>
