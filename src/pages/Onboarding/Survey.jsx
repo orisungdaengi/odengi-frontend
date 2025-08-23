@@ -108,7 +108,7 @@ export default function Survey() {
     // 레이아웃 상수
     const SAFE_BOTTOM = 'env(safe-area-inset-bottom)';
     const BTN_H = 30;
-    const BTN_OFFSET = 112;
+    const BTN_OFFSET = 42;
     const MAX_BTN_OFFSET = 20;
     const EXTRA = 20;
     const SCROLL_INSET = `calc(${SAFE_BOTTOM} + ${BTN_H + MAX_BTN_OFFSET + EXTRA}px)`;
