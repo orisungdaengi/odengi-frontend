@@ -46,24 +46,18 @@ export default function OnboardingGender() {
             </div>
 
             {/* 선택 버튼들 */}
-            <div className="absolute left-[55px] top-[387px] inline-flex items-center gap-[14px]">
+            <div className="absolute top-[387px] left-1/2 -translate-x-1/2 flex items-center justify-center gap-8">
                 <SelectChip
                     label="남자"
-                    active={data.gender === 'm'}                 // ✅ 저장된 값 사용
-                    onClick={() => update({ gender: 'm' })}     // ✅ 업데이트
-                    widthClass="w-[84px]"
+                    active={data.gender === 'm'}
+                    onClick={() => update({ gender: 'm' })}
+                    widthClass="w-[120px] h-[56px]"   // ⬅️ 버튼 크기 키움
                 />
                 <SelectChip
                     label="여자"
                     active={data.gender === 'f'}
                     onClick={() => update({ gender: 'f' })}
-                    widthClass="w-[84px]"
-                />
-                <SelectChip
-                    label="기타"
-                    active={data.gender === 'other'}
-                    onClick={() => update({ gender: 'other' })}
-                    widthClass="w-[84px]"
+                    widthClass="w-[120px] h-[56px]"   // ⬅️ 버튼 크기 키움
                 />
             </div>
 
