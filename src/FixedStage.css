@@ -30,8 +30,8 @@ html, body, #root {
 
     /* 계산된 스케일을 적용하고, 왼쪽 위를 기준으로 크기를 조절합니다. */
     transform: scale(var(--scale));
-    transform-origin: top left;
-
+    /* transform-origin: top left; */
+    transform-origin: center center;
     /* 그림자 효과 추가 */
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
