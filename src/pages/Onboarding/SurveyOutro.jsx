@@ -29,7 +29,7 @@ export default function SurveyOutro() {
             <button
                 type="button"
                 onClick={() => {
-                    nav('/home/home');   // 다음 페이지로 이동
+                    nav('/home');   // 다음 페이지로 이동
                 }}
                 className="absolute left-[318px] top-[763px] w-14 h-14 rounded-full bg-white
           grid place-items-center active:scale-95 transition"

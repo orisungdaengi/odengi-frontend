@@ -20,7 +20,7 @@ export default function Login() {
             localStorage.setItem('userId', String(userId))
             localStorage.setItem('userName', user?.name ?? '')
             localStorage.setItem('userUserId', user?.user_id ?? '')
-             // 3) 다음 화면으로
+            // 3) 다음 화면으로
             nav('/onboarding/survey-outro', { replace: true })
         } catch (err) {
             setError(err.message || '로그인 실패')
@@ -97,7 +97,7 @@ export default function Login() {
                     </button>
 
                     <div className="flex w-full justify-center font-normal">
-                    <div className="flex items-center text-[13px] gap-2 text-slate-50/60">
+                        <div className="flex items-center text-[13px] gap-2 text-slate-50/60">
                             <Link to="/find-id" className="hover:underline">아이디 찾기</Link>
                             <span className="w-[8px] h-px rotate-90 bg-slate-50/60"/>
                             <Link to="/find-password" className="hover:underline">비밀번호 찾기</Link>

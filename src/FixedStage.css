@@ -1,22 +1,44 @@
 :root{
-    --w:402; --h:874;
-    --scale: min(1, 100vw/(var(--w)*1px), 100dvh/(var(--h)*1px));
+    --w: 402; --h: 874;
+    /* 화면 크기에 맞춰 전체적인 스케일을 계산합니다. */
+    --scale: min(1, 100vw / (var(--w) * 1px), 100vh / (var(--h) * 1px));
 }
 
-html,body,#root{height:100%; margin:0; background:#000;}
-*{box-sizing:border-box;}
+html, body, #root {
+    height: 100%; 
+    margin: 0; 
+    background: #000;
+}
 
-.stage-outer{ height:100%; display:grid; place-items:center; }
-.stage-inner{
-    width:calc(var(--w)*1px);
-    height:calc(var(--h)*1px);
-    background:#fff;
-    border-radius:24px; overflow:hidden;
+/* ✨ [수정]
+   가운데 정렬 방식을 position: fixed와 transform: translate()로 변경하여
+   다른 스타일과의 충돌을 피하고 항상 정중앙을 유지하도록 합니다.
+*/
+.stage-outer {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.stage-inner {
+    width: calc(var(--w) * 1px);
+    height: calc(var(--h) * 1px);
+    background: #121212; /* 앱 내부 배경색을 어둡게 설정 */
+    border-radius: 24px; 
+    overflow: hidden;
+
+    /* 계산된 스케일을 적용하고, 왼쪽 위를 기준으로 크기를 조절합니다. */
     transform: scale(var(--scale));
     transform-origin: top left;
+
+    /* 그림자 효과 추가 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
-.safe{
-    height:100%;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+.safe, .App, .App > div {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
 }
