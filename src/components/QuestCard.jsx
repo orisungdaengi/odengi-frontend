@@ -26,8 +26,8 @@ const QuestCard = ({ currentQuest, onComplete,majorLevel=1 }) => {
       // currentQuest가 있을 때만 onComplete 함수를 실행합니다.
       onClick={() => currentQuest && onComplete(currentQuest.id)}
       sx={{
-        width: '90%',
-        p: 2,
+        width: '100%',
+        p: '16px',
         backgroundColor: backgroundColor,
         color: 'white',
         borderRadius: '16px',

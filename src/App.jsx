@@ -1,15 +1,23 @@
+import './FixedStage.css'
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import './FixedStage.css';
+// auth 및 onboarding
+import Login from './pages/Auth/Login'
+import Signup from './pages/Auth/Signup'
+import OnboardingIntro from './pages/Onboarding/Intro';
+import OnboardingName from './pages/Onboarding/Name'
+import OnboardingGender from './pages/Onboarding/Gender'
+import OnboardingAge from './pages/Onboarding/Age'
+import AddressSearch from './pages/Onboarding/AddressSearch'
+import AddressMap from './pages/Onboarding/AddressMap'
+import OnboardingOutro from './pages/Onboarding/Outro';
+import SurveyIntro from './pages/Onboarding/SurveyIntro';
+import Survey from './pages/Onboarding/Survey';
+import SurveyOutro from './pages/Onboarding/SurveyOutro';
 
-
-
-// 스크린샷에 맞는 정확한 경로로 수정
-
-import Login from './pages/Auth/Login.jsx';
-import Signup from './pages/Auth/Signup.jsx';
+// 메인 화면
 import Home from './pages/Home/Home.jsx';
 import NotificationPage from './pages/Home/NotificationPage.jsx';
 import QuestListPage from './pages/Quests/QuestListPage.jsx';
@@ -21,7 +29,8 @@ import QuestDetailPage_1_7 from './pages/Quests/QuestDetails/1-7.jsx';
 import QuestDetailPage_3_7 from './pages/Quests/QuestDetails/3-7.jsx';
 import ChatPage_3_7 from './pages/Quests/QuestDetails/Chat_3-7.jsx';
 import QuestClearPage from './pages/Quests/QuestClearPage05.jsx';
-import Chat from './pages/Chat/Chat.jsx'; // ✨ 1. 새로 만드신 Chat.jsx를 import 합니다.
+import Chat from './pages/Chat/Chat.jsx';
+import RecordPage from './pages/Records/Records.jsx';
 
 
 function AppLayout() {
@@ -37,9 +46,6 @@ function AppLayout() {
     );
 }
 
-// App.jsx 파일의 AnimatedRoutes 함수를 아래 코드로 교체하세요.
-
-
 function AnimatedRoutes() {
     const location = useLocation();
     const [majorLevel, setMajorLevel] = useState(1);
@@ -53,22 +59,24 @@ function AnimatedRoutes() {
         <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
 
-                {/* 변경점: 기본 경로 '/'로 접속 시 '/quests' 페이지로 즉시 이동(Navigate)하도록 수정했습니다.
-                */}
-                <Route path="/" element={<Navigate to="/quests" />} />
-                
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-
-
-                {/* 1. 기본 경로('/')를 로그인 페이지로 리다이렉트 */}
+                {/* 기본 경로 */}
                 <Route path="/" element={<Navigate to="/login" />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
-                {/* 2. 홈 화면 경로는 '/home'으로 명확히 지정 */}
 
-                <Route
-                    path="/home"
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/onboarding/intro" element={<OnboardingIntro />} />
+                <Route path="/onboarding/name" element={<OnboardingName />} />
+                <Route path="/onboarding/gender" element={<OnboardingGender />} />
+                <Route path="/onboarding/age" element={<OnboardingAge />} />
+                <Route path="/onboarding/address" element={<AddressSearch />} />
+                <Route path="/onboarding/address-map" element={<AddressMap />} />
+                <Route path="/onboarding/outro" element={<OnboardingOutro />} />
+                <Route path="/onboarding/survey-intro" element={<SurveyIntro />} />
+                <Route path="/onboarding/survey" element={<Survey />} />
+                <Route path="/onboarding/survey-outro" element={<SurveyOutro />} />
+
+
+                <Route path="/home"
                     element={
                         <Home
                             majorLevel={majorLevel} setMajorLevel={setMajorLevel}
@@ -76,19 +84,15 @@ function AnimatedRoutes() {
                             quests={quests} setQuests={setQuests}
 
                             selectedStep={selectedStep} setSelectedStep={setSelectedStep}  // ✅ 전달
-
-
                         />
                     }
                 />
                 <Route path="/notifications" element={<NotificationPage />} />
-                <Route
-                    path="/quests"
-
+                <Route path="/quests"
                     element={
                         <QuestListPage
                             quests={quests} setQuests={setQuests}
-                            selectedStep={selectedStep} setSelectedStep={setSelectedStep}  // ✅ 전달
+                            selectedStep={selectedStep} setSelectedStep={setSelectedStep} majorLevel={majorLevel} // ✅ 전달
                         />
                     }
                 />
@@ -98,9 +102,7 @@ function AnimatedRoutes() {
                 <Route path="/quests/3-7" element={<QuestDetailPage_3_7 />} />
                 <Route path="/quests/3-7/chat" element={<ChatPage_3_7 />} />
                 <Route path="/chat" element={<Chat />} />
-
-                    element={ <QuestListPage quests={quests} setQuests={setQuests} majorLevel={majorLevel} /> }
-                />
+                <Route path="/records" element={<RecordPage />} />
 
                 <Route path="*" element={<div className="p-4 text-white">페이지를 찾을 수 없습니다.</div>} />
 
@@ -114,11 +116,25 @@ export default function App() {
         <div className="stage-outer">
             <div className="stage-inner">
                 <div className="safe">
-                    <BrowserRouter>
-                        <AppLayout />
-                    </BrowserRouter>
+                    {/*<Routes>*/}
+                    <AppLayout />
+                        {/*<Route path="/" element={<Navigate to="/login" replace/>}/>*/}
+                        {/*<Route path="/login" element={<Login/>}/>*/}
+                        {/*<Route path="/signup" element={<Signup />} />*/}
+                        {/*<Route path="/onboarding/intro" element={<OnboardingIntro />} />*/}
+                        {/*<Route path="/onboarding/name" element={<OnboardingName />} />*/}
+                        {/*<Route path="/onboarding/gender" element={<OnboardingGender />} />*/}
+                        {/*<Route path="/onboarding/age" element={<OnboardingAge />} />*/}
+                        {/*<Route path="/onboarding/address" element={<AddressSearch />} />*/}
+                        {/*<Route path="/onboarding/address-map" element={<AddressMap />} />*/}
+                        {/*<Route path="/onboarding/outro" element={<OnboardingOutro />} />*/}
+                        {/*<Route path="/onboarding/survey-intro" element={<SurveyIntro />} />*/}
+                        {/*<Route path="/onboarding/survey" element={<Survey />} />*/}
+                        {/*<Route path="/onboarding/survey-outro" element={<SurveyOutro />} />*/}
+                        {/*<Route path="*" element={<div className="p-4">404</div>} />*/}
+                    {/*</Routes>*/}
                 </div>
             </div>
         </div>
-    );
+    )
 }

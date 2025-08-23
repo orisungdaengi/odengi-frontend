@@ -21,7 +21,7 @@ const layoutPattern = [70, 60, 50, 40, 30, 30, 40, 50, 60, 70];
 const verticalGap = 100;
 
 
-const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => {
+const QuestListPage = ({ quests, selectedStep, setSelectedStep }) => {
   const navigate = useNavigate();
 
 
@@ -138,6 +138,7 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
           backgroundPosition: 'top center',
           borderRadius:'24px',
         }}
+        >
 
         <Box
           component="img"
@@ -189,7 +190,7 @@ const QuestListPage = ({ quests, setQuests, selectedStep, setSelectedStep }) => 
                   sx={{
                     position: 'relative', 
                     zIndex: 1,
-                    fontWeight: '500',
+                    fontWeight: '600',
                     fontSize: '1.3rem', 
                     color: isGreenCircle ? 'white' : '#3E5F3C',
                   }}

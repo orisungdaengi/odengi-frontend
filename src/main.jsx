@@ -1,11 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
+import { OnboardingProvider } from "./state/OnboardingContext";
 
-// App.jsx에서 라우터를 관리하도록 여기서 <BrowserRouter>를 삭제합니다.
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <App />
+        <BrowserRouter>
+            <OnboardingProvider>
+                <App />
+            </OnboardingProvider>
+        </BrowserRouter>
     </React.StrictMode>
 )
