@@ -4,14 +4,15 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import { AnimatePresence } from 'framer-motion';
 
 // auth 및 onboarding
-import Login from './pages/Auth/Login'
-import Signup from './pages/Auth/Signup'
+import StartPage from './pages/Auth/Start';
+import Login from './pages/Auth/Login';
+import Signup from './pages/Auth/Signup';
 import OnboardingIntro from './pages/Onboarding/Intro';
-import OnboardingName from './pages/Onboarding/Name'
-import OnboardingGender from './pages/Onboarding/Gender'
-import OnboardingAge from './pages/Onboarding/Age'
+import OnboardingName from './pages/Onboarding/Name';
+import OnboardingGender from './pages/Onboarding/Gender';
+import OnboardingAge from './pages/Onboarding/Age';
 import AddressSearch from './pages/Onboarding/AddressSearch'
-import AddressMap from './pages/Onboarding/AddressMap'
+import AddressMap from './pages/Onboarding/AddressMap';
 import OnboardingOutro from './pages/Onboarding/Outro';
 import SurveyIntro from './pages/Onboarding/SurveyIntro';
 import Survey from './pages/Onboarding/Survey';
@@ -60,7 +61,8 @@ function AnimatedRoutes() {
             <Routes location={location} key={location.pathname}>
 
                 {/* 기본 경로 */}
-                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/" element={<StartPage />} />
+                {/*<Route path="/" element={<Navigate to="/login" />} />*/}
 
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup />} />
